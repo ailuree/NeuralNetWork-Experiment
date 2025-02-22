@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>遗传算法求解单变量函数最大值问题</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-box {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+
+        .formula {
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 50px 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        .step {
+            width: 180px;
+            padding: 15px;
+            margin: 0 10px;
+            background-color: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .step-details {
+            background-color: #fff3e0;
+            border: 1px solid #ffa000;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .arrow {
+            flex-grow: 0;
+            color: #1976d2;
+            font-size: 24px;
+            margin: 60px 5px 0;
+            position: relative;
+        }
+
+        .arrow-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .iteration-arrow {
+            position: absolute;
+            top: -30px;
+            right: 280px;
+            width: 600px;
+            height: 30px;
+            border-top: 2px dashed #1976d2;
+            border-left: 2px dashed #1976d2;
+        }
+
+        .iteration-label {
+            position: absolute;
+            top: -50px;
+            right: 580px;
+            color: #1976d2;
+            font-style: italic;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .step-description {
+            font-size: 12px;
+            color: #666;
+            margin: 8px 0;
+        }
+
+        .legend {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title-box">
+            <h1>遗传算法求解单变量函数最大值问题</h1>
+            <div class="formula">
+                f(x) = x + 10sin(5x) + 7sin(4x), x ∈ [0,10]
+            </div>
+        </div>
+
+        <div class="flow-diagram">
+            <div class="step">
+                <div class="step-title">初始化种群</div>
+                <div class="step-description">生成初始解集合</div>
+                <div class="step-details">
+                    • 22位二进制编码<br>
+                    • 种群大小：100<br>
+                    • 映射到区间[0,10]<br>
+                    • 精度：2.38×10^-6
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">二进制解码</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">适应度评估</div>
+                <div class="step-description">计算目标函数值</div>
+                <div class="step-details">
+                    • x + 10sin(5x) + 7sin(4x)<br>
+                    • 直接作为适应度值<br>
+                    • 寻找最大值<br>
+                    • 记录当前最优解
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">基于适应度</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">选择操作</div>
+                <div class="step-description">优胜劣汰</div>
+                <div class="step-details">
+                    • 精英保留策略<br>
+                    • 保留2个最优个体<br>
+                    • 轮盘赌选择<br>
+                    • 适应度越大概率越高
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">基因重组</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">交叉操作</div>
+                <div class="step-description">产生新个体</div>
+                <div class="step-details">
+                    • 两点交叉<br>
+                    • 交叉率：0.8<br>
+                    • 随机选择交叉位置<br>
+                    • 精英个体不参与
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">基因突变</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">变异操作</div>
+                <div class="step-description">维持多样性</div>
+                <div class="step-details">
+                    • 基因位0/1翻转<br>
+                    • 变异率：0.01<br>
+                    • 精英个体不参与<br>
+                    • 跳出局部最优
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">检查终止条件</div>
+            </div>
+
+            <div class="step" style="background-color: #fff8e1; border-color: #ffa000;">
+                <div class="step-title">终止判断</div>
+                <div class="step-description">收敛性检验</div>
+                <div class="step-details">
+                    • 最大代数：200<br>
+                    • 连续20代评估<br>
+                    • 收敛阈值：1e-6<br>
+                    • 最优值稳定
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="step" style="background-color: #e8f5e9; border-color: #4caf50;">
+                <div class="step-title">输出最优解</div>
+                <div class="step-description">x ≈ 6.6244</div>
+                <div class="step-details">
+                    • 最大值：23.3851<br>
+                    • 收敛代数：194<br>
+                    • 运行时间：4.03秒<br>
+                    • 结果可视化
+                </div>
+            </div>
+
+            <div class="iteration-arrow"></div>
+            <div class="iteration-label">不满足终止条件则继续迭代</div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">• <strong>搜索空间</strong>：在[0,10]区间内寻找目标函数的最大值</div>
+            <div class="legend-item">• <strong>编码精度</strong>：使用22位二进制编码，可以达到约2.38×10^-6的精度</div>
+            <div class="legend-item">• <strong>优化目标</strong>：最大化函数f(x) = x + 10sin(5x) + 7sin(4x)</div>
+        </div>
+    </div>
+</body>
+
+</html>

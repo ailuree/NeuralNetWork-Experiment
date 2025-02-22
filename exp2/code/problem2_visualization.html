@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>遗传算法求解多维函数最小值问题</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-box {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+
+        .formula {
+            font-family: "Times New Roman", serif;
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .flow-diagram {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin: 50px 0;
+            padding: 20px;
+            position: relative;
+        }
+
+        .step {
+            width: 180px;
+            padding: 15px;
+            margin: 0 10px;
+            background-color: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .step-details {
+            background-color: #fff3e0;
+            border: 1px solid #ffa000;
+            border-radius: 4px;
+            padding: 8px;
+            margin-top: 10px;
+            font-size: 12px;
+            text-align: left;
+        }
+
+        .arrow {
+            flex-grow: 0;
+            color: #1976d2;
+            font-size: 24px;
+            margin: 60px 5px 0;
+            position: relative;
+        }
+
+        .arrow-label {
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .iteration-arrow {
+            position: absolute;
+            top: -30px;
+            right: 280px;
+            width: 600px;
+            height: 30px;
+            border-top: 2px dashed #1976d2;
+            border-left: 2px dashed #1976d2;
+        }
+
+        .iteration-label {
+            position: absolute;
+            top: -50px;
+            right: 580px;
+            color: #1976d2;
+            font-style: italic;
+        }
+
+        .step-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+
+        .step-description {
+            font-size: 12px;
+            color: #666;
+            margin: 8px 0;
+        }
+
+        .legend {
+            margin-top: 40px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title-box">
+            <h1>遗传算法求解多维函数最小值问题</h1>
+            <div class="formula">
+                f(x) = 20 + Σ(xi²), xi ∈ [-20,20], i = 1,2,...,10
+            </div>
+        </div>
+
+        <div class="flow-diagram">
+            <div class="step">
+                <div class="step-title">初始化种群</div>
+                <div class="step-description">生成初始解集合</div>
+                <div class="step-details">
+                    • 200位二进制编码<br>
+                    • 种群大小：200<br>
+                    • 每维20位编码<br>
+                    • 10维空间映射
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">维度解码</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">适应度评估</div>
+                <div class="step-description">计算目标函数值</div>
+                <div class="step-details">
+                    • 20 + Σ(xi²)<br>
+                    • 取负作为适应度<br>
+                    • 寻找最小值<br>
+                    • 理论最小值：20
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">锦标赛选择</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">选择操作</div>
+                <div class="step-description">优胜劣汰</div>
+                <div class="step-details">
+                    • 精英保留策略<br>
+                    • 保留4个最优个体<br>
+                    • 锦标赛选择(k=3)<br>
+                    • 适合高维问题
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">分维度交叉</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">交叉操作</div>
+                <div class="step-description">产生新个体</div>
+                <div class="step-details">
+                    • 维度独立交叉<br>
+                    • 交叉率：0.8<br>
+                    • 两点交叉<br>
+                    • 精英个体不参与
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">基因突变</div>
+            </div>
+
+            <div class="step">
+                <div class="step-title">变异操作</div>
+                <div class="step-description">维持多样性</div>
+                <div class="step-details">
+                    • 基因位0/1翻转<br>
+                    • 变异率：0.01<br>
+                    • 精英个体不参与<br>
+                    • 维度独立变异
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+                <div class="arrow-label">检查终止条件</div>
+            </div>
+
+            <div class="step" style="background-color: #fff8e1; border-color: #ffa000;">
+                <div class="step-title">终止判断</div>
+                <div class="step-description">收敛性检验</div>
+                <div class="step-details">
+                    • 最大代数：500<br>
+                    • 连续30代评估<br>
+                    • 收敛阈值：1e-6<br>
+                    • 最优值稳定
+                </div>
+            </div>
+
+            <div class="arrow">
+                →
+            </div>
+
+            <div class="step" style="background-color: #e8f5e9; border-color: #4caf50;">
+                <div class="step-title">输出最优解</div>
+                <div class="step-description">f(x) ≈ 20.000001</div>
+                <div class="step-details">
+                    • 相对误差：0.000003%<br>
+                    • 收敛代数：176<br>
+                    • 运行时间：3.63秒<br>
+                    • 10维最优解
+                </div>
+            </div>
+
+            <div class="iteration-arrow"></div>
+            <div class="iteration-label">不满足终止条件则继续迭代</div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">• <strong>搜索空间</strong>：10维空间，每维[-20,20]区间</div>
+            <div class="legend-item">• <strong>编码精度</strong>：每维20位二进制编码，精度约3.8×10^-5</div>
+            <div class="legend-item">• <strong>优化目标</strong>：最小化球函数f(x) = 20 + Σ(xi²)</div>
+        </div>
+    </div>
+</body>
+
+</html>

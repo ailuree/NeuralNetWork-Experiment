@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>单变量函数最大值问题的遗传操作</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .title-box {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        .operator-section {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #1976d2;
+        }
+        .chromosome {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+        .label {
+            width: 100px;
+            font-weight: bold;
+        }
+        .gene-sequence {
+            display: flex;
+            gap: 2px;
+            background-color: #e3f2fd;
+            padding: 5px;
+            border-radius: 4px;
+        }
+        .gene {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #1976d2;
+            border-radius: 3px;
+        }
+        .arrow {
+            margin: 10px 0;
+            text-align: center;
+            color: #1976d2;
+            font-size: 24px;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            border-color: #ffc107;
+        }
+        .elite {
+            background-color: #e8f5e9;
+            border-color: #4caf50;
+        }
+        .note {
+            margin: 15px 0;
+            padding: 10px;
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+        }
+        .fitness-value {
+            margin-left: 15px;
+            padding: 5px 10px;
+            background-color: #e8f5e9;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-box">
+            <h1>单变量函数最大值问题的遗传操作</h1>
+            <div>f(x) = x + 10sin(5x) + 7sin(4x), x ∈ [0,10]</div>
+        </div>
+
+        <div class="operator-section">
+            <h2>1. 选择操作（轮盘赌选择 + 精英保留）</h2>
+            <div class="note">
+                • 保留2个精英个体<br>
+                • 轮盘赌选择其他个体<br>
+                • 选择概率正比于适应度值
+            </div>
+            <div class="chromosome">
+                <div class="label">精英1:</div>
+                <div class="gene-sequence">
+                    <div class="gene elite">1</div>
+                    <div class="gene elite">0</div>
+                    <div class="gene elite">1</div>
+                    <div class="gene elite">1</div>
+                    <div class="gene elite">...</div>
+                </div>
+                <div class="fitness-value">f(x) = 23.3851</div>
+            </div>
+            <div class="arrow">↓</div>
+            <div class="chromosome">
+                <div class="label">轮盘赌:</div>
+                <div style="display: flex; gap: 10px;">
+                    <div class="gene-sequence">
+                        <div class="gene">1</div>
+                        <div class="gene">0</div>
+                        <div class="gene">1</div>
+                        <div class="gene">0</div>
+                        <div class="gene">...</div>
+                    </div>
+                    <div class="gene-sequence">
+                        <div class="gene">0</div>
+                        <div class="gene">1</div>
+                        <div class="gene">1</div>
+                        <div class="gene">1</div>
+                        <div class="gene">...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="operator-section">
+            <h2>2. 两点交叉操作</h2>
+            <div class="note">
+                • 交叉率：0.8<br>
+                • 随机选择两个交叉点<br>
+                • 精英个体不参与交叉
+            </div>
+            <div class="chromosome">
+                <div class="label">父代1:</div>
+                <div class="gene-sequence">
+                    <div class="gene">1</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene">1</div>
+                    <div class="gene">...</div>
+                </div>
+            </div>
+            <div class="chromosome">
+                <div class="label">父代2:</div>
+                <div class="gene-sequence">
+                    <div class="gene">0</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene">0</div>
+                    <div class="gene">...</div>
+                </div>
+            </div>
+            <div class="arrow">↓</div>
+            <div class="chromosome">
+                <div class="label">子代1:</div>
+                <div class="gene-sequence">
+                    <div class="gene">1</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene">1</div>
+                    <div class="gene">...</div>
+                </div>
+            </div>
+            <div class="chromosome">
+                <div class="label">子代2:</div>
+                <div class="gene-sequence">
+                    <div class="gene">0</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene">0</div>
+                    <div class="gene">...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="operator-section">
+            <h2>3. 变异操作</h2>
+            <div class="note">
+                • 变异率：0.01<br>
+                • 随机位置基因翻转<br>
+                • 精英个体不参与变异
+            </div>
+            <div class="chromosome">
+                <div class="label">变异前:</div>
+                <div class="gene-sequence">
+                    <div class="gene">1</div>
+                    <div class="gene">0</div>
+                    <div class="gene highlight">1</div>
+                    <div class="gene">0</div>
+                    <div class="gene">...</div>
+                </div>
+            </div>
+            <div class="arrow">↓</div>
+            <div class="chromosome">
+                <div class="label">变异后:</div>
+                <div class="gene-sequence">
+                    <div class="gene">1</div>
+                    <div class="gene">0</div>
+                    <div class="gene highlight">0</div>
+                    <div class="gene">0</div>
+                    <div class="gene">...</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note" style="margin-top: 30px;">
+            <h3>操作特点：</h3>
+            <ul>
+                <li>精英保留：确保最优个体不会丢失</li>
+                <li>两点交叉：增加基因片段的交换多样性</li>
+                <li>低变异率：维持种群稳定性的同时保证多样性</li>
+                <li>适应度导向：选择操作基于个体的适应度值</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

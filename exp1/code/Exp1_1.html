@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BP神经网络拟合正弦函数结构</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+        svg {
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600" width="1000" height="600">
+        <defs>
+            <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                <polygon points="0 0, 10 3.5, 0 7" fill="#333" />
+            </marker>
+        </defs>
+
+        <!-- 标题 -->
+        <text x="500" y="30" text-anchor="middle" font-size="20" font-weight="bold">BP神经网络拟合正弦函数结构</text>
+
+        <!-- 输入层 -->
+        <g id="input_layer">
+            <circle cx="100" cy="300" r="20" fill="#f9f" stroke="#333" stroke-width="2" />
+            <text x="100" y="520" text-anchor="middle" font-size="14">输入层 (1个节点)</text>
+            <text x="100" y="260" text-anchor="middle" font-size="12">x</text>
+        </g>
+
+        <!-- 隐藏层1 -->
+        <g id="hidden_layer1">
+            <circle cx="300" cy="150" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="300" cy="225" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="300" cy="300" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="300" cy="375" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="300" cy="450" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <text x="300" y="520" text-anchor="middle" font-size="14">隐藏层1 (20个节点)</text>
+            <text x="300" y="540" text-anchor="middle" font-size="12">ReLU激活</text>
+        </g>
+
+        <!-- 隐藏层2 -->
+        <g id="hidden_layer2">
+            <circle cx="500" cy="150" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="500" cy="225" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="500" cy="300" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="500" cy="375" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="500" cy="450" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <text x="500" y="520" text-anchor="middle" font-size="14">隐藏层2 (20个节点)</text>
+            <text x="500" y="540" text-anchor="middle" font-size="12">ReLU激活</text>
+        </g>
+
+        <!-- 隐藏层3 -->
+        <g id="hidden_layer3">
+            <circle cx="700" cy="200" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="700" cy="250" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="700" cy="300" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="700" cy="350" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <circle cx="700" cy="400" r="15" fill="#bbf" stroke="#333" stroke-width="2" />
+            <text x="700" y="520" text-anchor="middle" font-size="14">隐藏层3 (10个节点)</text>
+            <text x="700" y="540" text-anchor="middle" font-size="12">ReLU激活</text>
+        </g>
+
+        <!-- 输出层 -->
+        <circle cx="900" cy="300" r="20" fill="#bfb" stroke="#333" stroke-width="2" />
+        <text x="900" y="520" text-anchor="middle" font-size="14">输出层 (1个节点)</text>
+        <text x="900" y="260" text-anchor="middle" font-size="12">y</text>
+
+        <!-- 连接 -->
+        <g stroke="#999" stroke-width="1" opacity="0.3">
+            <!-- 输入层到隐藏层1 -->
+            <line x1="120" y1="300" x2="285" y2="150" />
+            <line x1="120" y1="300" x2="285" y2="450" />
+
+            <!-- 隐藏层1到隐藏层2 -->
+            <line x1="315" y1="150" x2="485" y2="150" />
+            <line x1="315" y1="150" x2="485" y2="450" />
+            <line x1="315" y1="450" x2="485" y2="150" />
+            <line x1="315" y1="450" x2="485" y2="450" />
+
+            <!-- 隐藏层2到隐藏层3 -->
+            <line x1="515" y1="150" x2="685" y2="200" />
+            <line x1="515" y1="150" x2="685" y2="400" />
+            <line x1="515" y1="450" x2="685" y2="200" />
+            <line x1="515" y1="450" x2="685" y2="400" />
+
+            <!-- 隐藏层3到输出层 -->
+            <line x1="715" y1="200" x2="880" y2="300" />
+            <line x1="715" y1="250" x2="880" y2="300" />
+            <line x1="715" y1="300" x2="880" y2="300" />
+            <line x1="715" y1="350" x2="880" y2="300" />
+            <line x1="715" y1="400" x2="880" y2="300" />
+        </g>
+
+        <!-- 优化器信息 -->
+        <text x="500" y="580" text-anchor="middle" font-size="14">优化器: Adam (lr=0.005)</text>
+    </svg>
+</body>
+
+</html>

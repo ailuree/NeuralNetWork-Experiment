@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>旅行商问题的编码方案</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .title-box {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+        .encoding-diagram {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #1976d2;
+        }
+        .sequence {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .city {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #1976d2;
+            margin: 0 5px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+        .arrow {
+            font-size: 24px;
+            color: #1976d2;
+            margin: 0 20px;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-box">
+            <h1>旅行商问题的编码方案</h1>
+            <div>每个个体是一个城市的排列，表示旅行路线</div>
+        </div>
+
+        <div class="encoding-diagram">
+            <h2>排列编码示例</h2>
+            <div class="sequence">
+                <div class="city">0</div>
+                <div class="city">3</div>
+                <div class="city">1</div>
+                <div class="city">4</div>
+                <div class="city">2</div>
+                <div class="city">5</div>
+                <div class="city">6</div>
+                <div class="city">7</div>
+                <div class="city">8</div>
+                <div class="city">9</div>
+                <div class="city">10</div>
+                <div class="city">11</div>
+                <div class="city">12</div>
+                <div class="city">13</div>
+                <div class="city">14</div>
+            </div>
+        </div>
+
+        <div class="note">
+            <h3>编码特点：</h3>
+            <ul>
+                <li>每个个体是一个城市的排列，表示旅行路线</li>
+                <li>保证每个城市访问一次且仅访问一次</li>
+                <li>排列编码便于实现交叉和变异操作</li>
+                <li>适合解决组合优化问题</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

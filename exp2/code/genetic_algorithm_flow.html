@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>遗传算法流程图</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .flow-box {
+            border: 2px solid #4a90e2;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #e8f4ff;
+        }
+        .arrow {
+            text-align: center;
+            font-size: 24px;
+            color: #4a90e2;
+            margin: 5px 0;
+        }
+        .description {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>遗传算法流程图</h1>
+        
+        <div class="flow-box">
+            初始化种群
+            <div class="description">随机生成初始个体，构成初始种群</div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        
+        <div class="flow-box">
+            适应度评估
+            <div class="description">计算每个个体的适应度值</div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        
+        <div class="flow-box">
+            选择操作
+            <div class="description">根据适应度选择优秀个体</div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        
+        <div class="flow-box">
+            交叉操作
+            <div class="description">交换父代染色体片段产生子代</div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        
+        <div class="flow-box">
+            变异操作
+            <div class="description">随机改变部分基因</div>
+        </div>
+        
+        <div class="arrow">↓</div>
+        
+        <div class="flow-box">
+            终止判断
+            <div class="description">是否满足终止条件？</div>
+        </div>
+        
+        <div class="arrow">↙ 否　　　是 ↘</div>
+        
+        <div style="display: flex; justify-content: space-between;">
+            <div class="arrow" style="transform: rotate(90deg);">↓</div>
+            <div class="flow-box" style="width: 200px;">
+                输出最优解
+            </div>
+        </div>
+        
+        <div class="arrow" style="margin-left: -50px;">←</div>
+
+        <div class="note">
+            <strong>说明：</strong>
+            <ul>
+                <li>算法从初始种群开始，通过不断迭代进化</li>
+                <li>每一代都经过选择、交叉、变异操作</li>
+                <li>直到满足终止条件（如达到最大代数或收敛）</li>
+                <li>最终输出找到的最优解</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 

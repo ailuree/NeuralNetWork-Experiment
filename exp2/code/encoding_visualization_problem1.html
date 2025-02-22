@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>单变量函数最大值问题的编码映射</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title-box {
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #e3f2fd;
+            border-radius: 8px;
+        }
+
+        .mapping-diagram {
+            margin: 40px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-left: 5px solid #1976d2;
+        }
+
+        .binary-sequence {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+            justify-content: center;
+        }
+
+        .bit {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #1976d2;
+            margin: 0 2px;
+            background-color: #e3f2fd;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+
+        .arrow {
+            font-size: 24px;
+            color: #1976d2;
+            margin: 0 20px;
+        }
+
+        .real-value {
+            padding: 10px 20px;
+            background-color: #e8f5e9;
+            border: 1px solid #4caf50;
+            border-radius: 4px;
+            min-width: 100px;
+            text-align: center;
+        }
+
+        .bit-position {
+            font-size: 10px;
+            color: #666;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+        }
+
+        .formula {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: "Times New Roman", serif;
+            text-align: center;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title-box">
+            <h1>单变量函数最大值问题的编码映射</h1>
+            <div class="formula">
+                f(x) = x + 10sin(5x) + 7sin(4x), x ∈ [0,10]
+            </div>
+        </div>
+
+        <div class="mapping-diagram">
+            <h2>二进制编码示例</h2>
+            <div class="binary-sequence">
+                <div>
+                    <div class="bit">1</div>
+                    <div class="bit-position">2²¹</div>
+                </div>
+                <div>
+                    <div class="bit">0</div>
+                    <div class="bit-position">2²⁰</div>
+                </div>
+                <div>
+                    <div class="bit">1</div>
+                    <div class="bit-position">2¹⁹</div>
+                </div>
+                <div>
+                    <div class="bit">1</div>
+                    <div class="bit-position">2¹⁸</div>
+                </div>
+                <div>
+                    <div class="bit">0</div>
+                    <div class="bit-position">2¹⁷</div>
+                </div>
+                <div>...</div>
+                <div>
+                    <div class="bit">1</div>
+                    <div class="bit-position">2²</div>
+                </div>
+                <div>
+                    <div class="bit">0</div>
+                    <div class="bit-position">2¹</div>
+                </div>
+                <div>
+                    <div class="bit">1</div>
+                    <div class="bit-position">2⁰</div>
+                </div>
+                <span class="arrow">→</span>
+                <div class="real-value">
+                    x ∈ [0,10]
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <h3>编码特点：</h3>
+            <ul>
+                <li>染色体长度：22位二进制编码</li>
+                <li>编码空间：2²² ≈ 4.19×10⁶ 个不同的编码</li>
+                <li>编码精度：10/(2²²-1) ≈ 2.38×10⁻⁶</li>
+                <li>线性映射：保持解空间均匀分布</li>
+            </ul>
+        </div>
+
+        <div class="mapping-diagram">
+            <h2>解码过程</h2>
+            <div class="formula">
+                x = decimal_value × 10 / (2²² - 1)
+            </div>
+            <div class="note">
+                <h3>解码步骤：</h3>
+                <ol>
+                    <li>将22位二进制串转换为十进制数值</li>
+                    <li>将十进制数值线性映射到[0,10]区间</li>
+                    <li>保证编码精度和解码精确性</li>
+                    <li>处理边界情况（0和10）</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="note">
+            <h3>优点：</h3>
+            <ul>
+                <li>高精度：可以精确表示问题域中的解</li>
+                <li>均匀性：线性映射保证解空间均匀分布</li>
+                <li>完备性：可以表示区间内的所有可能解</li>
+                <li>易实现：二进制编码便于实现遗传操作</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
